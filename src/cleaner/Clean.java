@@ -109,29 +109,26 @@ public class Clean extends javax.swing.JFrame {
         JFileChooser file = new JFileChooser();
         file.showOpenDialog(this);
         arch = file.getSelectedFile();
-       
 
         try {
-             String cadena =""; 
+            String cadena = "";
 
             BufferedReader leer = new BufferedReader(new FileReader(arch));
-            String linea = leer.readLine()+"\n";
+            String linea = leer.readLine() + "\n";
             while (linea != null) {
-                linea = leer.readLine() ;
-                cadena += linea+ "\n";
+                linea = leer.readLine();
+                cadena += linea + "\n";
             }
             cadena = cadena.replaceAll("null", "");
-            System.out.println(cadena);
-           
+            cadena = cadena.replace("\n", "+").replace("\r", "+");
             Pattern tags = Pattern.compile("<.*>(.*)</.*>");
             Matcher match = tags.matcher(cadena);
-            System.out.println("entro");
             String regex = "<script>.*?</script>";
-            System.out.println("Before removing HTML Tags: " + cadena);
             cadena = cadena.replaceAll(regex, "");
-
             cadena = cadena.replaceAll("<.*?>", "");
-            System.out.println("After removing HTML Tags: " + cadena);
+            cadena = cadena.replace("+", "\n").replace("+", "\r");
+            System.out.println("After removing HTML Tags: \n" + cadena);
+
             JT_salida.append(cadena);
         } catch (Exception ex) {
         }

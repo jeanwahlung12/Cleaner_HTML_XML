@@ -19,7 +19,7 @@ public class Cleaner {
      */
     public static void main(String[] args) {
         
-        String cadena = "<script> qp2</script>\n"+" <title> hola <title>\n"
+        String cadena = "<script> \n function </script>\n"+" <title> hola <title>\n"
                 + "<div>  mundo</div> <script> qp2</script>";
         Pattern tags = Pattern.compile("<.*>(.*)</.*>");
         Matcher match = tags.matcher(cadena);
